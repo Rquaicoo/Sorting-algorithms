@@ -1,37 +1,5 @@
-import java.util.Arrays;
-import java.util.Scanner;
-
-public class App {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Select the sorting method you want to use");
-        System.out.println("1.  Insertion sort 2. Merge sort 3. Shell sort 4. Quicksort");
-
-        Scanner scan = new Scanner(System.in);
-        int number = scan.nextInt();
-
-        System.out.println("Enter the number of elements in the array (max = 20)");
-        int n = scan.nextInt();
-
-        System.out.println("Enter the figures in the array");
-        int[] array = new int[n];
-
-        for (int i=0; i<n; i++) {
-            array[i] = scan.nextInt();
-        }
-
-        if (number==1) {
-            insertionSort(array);
-            System.out.println(Arrays.toString(array));
-        }
-
-        if(number==4) {
-            quicksort(array, 0, array.length-1);
-            System.out.println(Arrays.toString(array));
-        }
-
-
-    }
-
+package com.russy;
+public class Sorting{
     public static void insertionSort(int[] array) {
         int temp;
         for(int j = 0; j <= array.length; j++) {
@@ -54,6 +22,22 @@ public class App {
             quicksort(array, index, right);
     }
 
+    public static void shellSort(int arrayToSort[]) {
+        int n = arrayToSort.length;
+    
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < n; i++) {
+                int key = arrayToSort[i];
+                int j = i;
+                while (j >= gap && arrayToSort[j - gap] > key) {
+                    arrayToSort[j] = arrayToSort[j - gap];
+                    j -= gap;
+                }
+                arrayToSort[j] = key;
+            }
+        }
+    }
+
     public static int partition(int[] array, int left, int right) {
         int pivot = array[(left+right) / 2];
         while (left <= right) {
@@ -73,6 +57,18 @@ public class App {
         return left;
     }
 
-
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;//searching for lowest index  
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
 }
-
